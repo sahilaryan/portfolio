@@ -60,7 +60,6 @@
         .submit-btn { background-color: var(--text-primary); color: var(--bg-color); }
         .submit-btn:hover { opacity: 0.9; }
         
-        /* Animation for section transitions */
         .page-section {
             animation: fadeIn 0.6s ease-in-out;
         }
@@ -69,7 +68,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Modal Styles */
         .modal { display: none; }
         .modal-overlay {
             opacity: 0;
@@ -83,14 +81,6 @@
         .modal.is-open .modal-overlay { opacity: 1; }
         .modal.is-open .modal-content { opacity: 1; transform: translateY(0); }
 
-        /* Skill badges */
-        .skill-badge {
-            background-color: var(--border-color);
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Resume list styling */
         .resume-list li {
             position: relative;
             padding-left: 20px;
@@ -104,6 +94,15 @@
             color: var(--accent-color);
             font-weight: bold;
         }
+        .theme-option {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .theme-option:hover {
+            background-color: var(--border-color);
+        }
     </style>
 </head>
 <body data-theme="gray">
@@ -113,15 +112,18 @@
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="text-4xl font-bold tracking-tight" style="color: var(--text-primary);">
-                        <a href="https://sahilprojects.dev" target="_blank" class="hover:text-[var(--accent-color)]">SAHIL</a>
-                    </h1>                    <p class="text-xs font-light tracking-widest" style="color: var(--text-secondary);">Computer Science Engineer & Data Enthusiast</p>
+                        <a href="#" data-page="about" class="hover:text-[var(--accent-color)]">SAHIL</a>
+                    </h1>
+                    <p class="text-xs font-light tracking-widest" style="color: var(--text-secondary);">Computer Science Engineer & Data Enthusiast</p>
                 </div>
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#" data-page="about" class="nav-link text-sm tracking-widest transition-colors duration-300">ABOUT</a>
-                    <a href="#" data-page="portfolio" class="nav-link text-sm tracking-widest transition-colors duration-300">PORTFOLIO</a>
-                    <a href="#" data-page="resume" class="nav-link text-sm tracking-widest transition-colors duration-300">RESUME</a>
-                    <a href="#" data-page="contact" class="nav-link text-sm tracking-widest transition-colors duration-300">CONTACT</a>
-                </nav>
+                <div class="flex items-center space-x-8">
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#" data-page="about" class="nav-link text-sm tracking-widest transition-colors duration-300">ABOUT</a>
+                        <a href="#" data-page="portfolio" class="nav-link text-sm tracking-widest transition-colors duration-300">PORTFOLIO</a>
+                        <a href="#" data-page="resume" class="nav-link text-sm tracking-widest transition-colors duration-300">RESUME</a>
+                        <a href="#" data-page="contact" class="nav-link text-sm tracking-widest transition-colors duration-300">CONTACT</a>
+                    </nav>
+                </div>
                 <button id="menu-btn" class="md:hidden focus:outline-none">
                     <svg class="w-6 h-6" style="color: var(--text-primary);" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -144,24 +146,23 @@
     <div id="project-modal" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="modal-overlay fixed inset-0 bg-black/50"></div>
         <div class="modal-content relative w-full max-w-3xl rounded-lg shadow-xl" style="background-color: var(--bg-color);">
-             <div class="p-8">
+            <div class="p-8">
                 <button id="close-modal-btn" class="absolute top-4 right-4 text-2xl font-bold" style="color: var(--text-secondary);">&times;</button>
                 <img id="modal-img" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-6">
                 <h3 id="modal-title" class="text-3xl font-bold mb-2" style="color: var(--text-primary);"></h3>
                 <p id="modal-description" class="mb-4" style="color: var(--text-secondary);"></p>
-              <div class="border-t custom-border pt-4">
-    <p class="font-semibold mb-2" style="color: var(--text-primary);">Technologies Used:</p>
-    <p id="modal-tech" class="mb-4" style="color: var(--text-secondary);"></p>
-
-    <div>
-        <p class="font-semibold mb-2" style="color: var(--text-primary);">Project Repository:<a id="data-github" href="https://github.com/sahil-analytics/big-data-analysis-pyspark" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: var(--accent-color);">View on GitHub</a>
-</p>
-    </div>
-</div>
+                <div class="border-t custom-border pt-4">
+                    <p class="font-semibold mb-2" style="color: var(--text-primary);">Technologies Used:</p>
+                    <p id="modal-tech" class="mb-4" style="color: var(--text-secondary);"></p>
+                    <div>
+                        <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: var(--accent-color);">
+                            View on GitHub </p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 
     <footer class="border-t custom-border mt-16">
         <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
@@ -207,7 +208,7 @@
                             <div class="md:col-span-3">
                                 <h2 class="text-4xl font-bold mb-6" style="color: var(--text-primary);">Hi, I'm Sahil</h2>
                                 <div class="space-y-4 font-light leading-relaxed" style="color: var(--text-secondary);">
-                                    <p> A <strong style="color: var(--text-primary);" class="font-normal">Computer Science Engineer</strong>, passionate about technology, data, and problem-solving. I recently completed my <strong style="color: var(--text-primary);" class="font-normal">Bachelor of Technology in Computer Science and Engineering</strong> from IK Gujral Punjab Technical University. Currently, I’m building skills in <strong style="color: var(--text-primary);" class="font-normal">Data Science, Artificial Intelligence, and Analytics</strong> through projects and certifications.</p>
+                                    <p>A <strong style="color: var(--text-primary);" class="font-normal">Computer Science Engineer</strong>, passionate about technology, data, and problem-solving. I recently completed my <strong style="color: var(--text-primary);" class="font-normal">Bachelor of Technology in Computer Science and Engineering</strong> from IK Gujral Punjab Technical University. Currently, I’m building skills in <strong style="color: var(--text-primary);" class="font-normal">Data Science, Artificial Intelligence, and Analytics</strong> through projects and certifications.</p>
                                     <p>I enjoy working with <strong style="color: var(--text-primary);" class="font-normal">Python, SQL, Power BI, and Machine Learning</strong>, and I’m continuously learning how to turn raw data into meaningful insights. My portfolio showcases projects that reflect both my academic background and my interest in real-world applications. Beyond academics, I’m curious, detail-oriented, and always looking for opportunities to <strong style="color: var(--text-primary);" class="font-normal">learn, innovate, and grow</strong> in the tech field.</p>
                                     <p>So, please check out my <strong style="color: var(--text-primary);" class="font-normal">Projects</strong> in the next tab over, and if you have feedback or would like to work together, reach out through the <strong style="color: var(--text-primary);" class="font-normal">Contact</strong> page or any other means.</p>
                                 </div>
@@ -217,52 +218,50 @@
                 `,
                 portfolio: `
                     <section id="portfolio" class="page-section py-20">
-    <h3 class="text-center font-light mb-12 text-lg" style="color: var(--text-secondary);">What I've Been Working On</h3>
-    
-    <div>
-        <h4 class="text-3xl font-bold mb-8" style="color: var(--text-primary);">Projects & Experiments</h4>
-        <div class="grid md:grid-cols-2 gap-10">
-        
-        <div class="group" data-title="Business Intelligence Dashboard" data-img="Bike-Dashboard.png" data-desc="Created an interactive dashboard based on Excel and SQL databases to monitor KPIs like sales, revenue trends, and customer retention. Implemented data modeling and visualization concepts to aid strategic decision-making." data-tech="Data Modeling, SQL Queries, Power BI, Excel Formulas, Data Visualization, Dashboard Design" data-github="https://github.com/sahil-analytics/bike-data-analysis">
-        <img src="Bike-Dashboard.png" alt="Business Intelligence Dashboard" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
-                <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Business Intelligence Dashboard</h5>
-                <div class="flex items-center space-x-4 mt-2">
-                <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
-                    </div>
-            </div>
+                        <h3 class="text-center font-light mb-12 text-lg" style="color: var(--text-secondary);">What I've Been Working On</h3>
+                        <div>
+                            <h4 class="text-3xl font-bold mb-8" style="color: var(--text-primary);">Projects & Experiments</h4>
+                            <div class="grid md:grid-cols-2 gap-10">
+                            
+                                <div class="group" data-title="Business Intelligence Dashboard" data-img="Bike-Dashboard.png" data-desc="Created an interactive dashboard based on Excel and SQL databases to monitor KPIs like sales, revenue trends, and customer retention. Implemented data modeling and visualization concepts to aid strategic decision-making." data-tech="Data Modeling, SQL Queries, Power BI, Excel Formulas, Data Visualization, Dashboard Design" data-github-url="https://github.com/sahil-analytics/bike-data-analysis">
+                                    <img src="Bike-Dashboard.png" alt="Business Intelligence Dashboard" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
+                                    <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Business Intelligence Dashboard</h5>
+                                    <div class="flex items-center space-x-4 mt-2">
+                                        <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
+                                    </div>
+                                </div>
 
-            <div class="group" data-title="Customer Behavior Analysis with PySpark" data-img="spark_UI.png" data-desc="This project performs large-scale analysis of e-commerce customer data to uncover purchasing patterns, segment customers, and identify behavioral trends using Apache Spark's distributed computing capabilities via PySpark. The entire pipeline—from data generation to machine learning and insight reporting is executed in a distributed manner, making it suitable for big data workloads." data-tech="Python, PySpark, Hadoop/Spark, Big Data Processing, Apache Spark & PySpark, PySpark SQL, PySpark MLlib, Python, Docker, Jupyter / Python, Spark UI" data-github="https://github.com/sahil-analytics/big-data-analysis-pyspark">
-                <img src="spark_UI.png?text=PySpark+Analysis" alt="Customer Behavior Analysis with PySpark" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
-                <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Customer Behavior Analysis with PySpark</h5>
-                <div class="flex items-center space-x-4 mt-2">
-                    <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
-                </div>
-            </div>
+                                <div class="group" data-title="Customer Behavior Analysis with PySpark" data-img="spark_UI.png" data-desc="This project performs large-scale analysis of e-commerce customer data to uncover purchasing patterns, segment customers, and identify behavioral trends using Apache Spark's distributed computing capabilities via PySpark. The entire pipeline—from data generation to machine learning and insight reporting is executed in a distributed manner, making it suitable for big data workloads." data-tech="Python, PySpark, Hadoop/Spark, Big Data Processing, Apache Spark & PySpark, PySpark SQL, PySpark MLlib, Python, Docker, Jupyter / Python, Spark UI" data-github-url="https://github.com/sahil-analytics/big-data-analysis-pyspark">
+                                    <img src="spark_UI.png?text=PySpark+Analysis" alt="Customer Behavior Analysis with PySpark" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
+                                    <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Customer Behavior Analysis with PySpark</h5>
+                                    <div class="flex items-center space-x-4 mt-2">
+                                        <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
+                                    </div>
+                                </div>
 
-            <div class="group" data-title="Predictive Analytics for Sales Forecasting" data-img="https://placehold.co/600x400/1a202c/edf2f7?text=Sales+Forecasting" data-desc="Created a predictive model to predict sales trends using Python libraries. Improved forecasting accuracy and delivered data-driven insights for business planning." data-tech="Python, Pandas, Scikit-learn, Machine Learning" data-github="#">
-                <img src="https://placehold.co/600x400/1a202c/edf2f7?text=Sales+Forecasting" alt="Sales Forecasting" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
-                <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Predictive Analytics for Sales</h5>
-                <div class="flex items-center space-x-4 mt-2">
-                    <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
-                </div>
-            </div>
+                                <div class="group" data-title="Predictive Analytics for Sales Forecasting" data-img="https://placehold.co/600x400/1a202c/edf2f7?text=Sales+Forecasting" data-desc="Created a predictive model to predict sales trends using Python libraries. Improved forecasting accuracy and delivered data-driven insights for business planning." data-tech="Python, Pandas, Scikit-learn, Machine Learning" data-github-url="#">
+                                    <img src="https://placehold.co/600x400/1a202c/edf2f7?text=Sales+Forecasting" alt="Sales Forecasting" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
+                                    <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Predictive Analytics for Sales</h5>
+                                    <div class="flex items-center space-x-4 mt-2">
+                                        <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
+                                    </div>
+                                </div>
 
-            <div class="group" data-title="Generative AI Chatbot" data-img="https://placehold.co/600x400/1a202c/edf2f7?text=AI+Chatbot" data-desc="Developed a chatbot using Generative AI to help automate customer support questions and develop business insights. Faster response time and enhanced user experience using real-time automated support." data-tech="Python, Generative AI, OpenAI API" data-github="#">
-                <img src="https://placehold.co/600x400/1a202c/edf2f7?text=AI+Chatbot" alt="AI Chatbot" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
-                <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Generative AI Chatbot</h5>
-                <div class="flex items-center space-x-4 mt-2">
-                    <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
-                </div>
-            </div>
+                                <div class="group" data-title="Generative AI Chatbot" data-img="https://placehold.co/600x400/1a202c/edf2f7?text=AI+Chatbot" data-desc="Developed a chatbot using Generative AI to help automate customer support questions and develop business insights. Faster response time and enhanced user experience using real-time automated support." data-tech="Python, Generative AI, OpenAI API" data-github-url="#">
+                                    <img src="https://placehold.co/600x400/1a202c/edf2f7?text=AI+Chatbot" alt="AI Chatbot" class="w-full h-auto object-cover rounded-lg shadow-md mb-4">
+                                    <h5 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Generative AI Chatbot</h5>
+                                    <div class="flex items-center space-x-4 mt-2">
+                                        <button class="view-details-btn text-sm font-semibold" style="color: var(--accent-color);">View Details &rarr;</button>
+                                    </div>
+                                </div>
 
-        </div>
-    </div>
-</section>
+                            </div>
+                        </div>
+                    </section>
                 `,
                 resume: `
                     <section id="resume" class="page-section py-20">
                         <div class="max-w-4xl mx-auto">
-                             
                             <div class="flex justify-between items-center mb-12">
                                 <div>
                                     <h2 class="text-4xl font-bold" style="color: var(--text-primary);">SAHIL</h2>
@@ -273,99 +272,98 @@
                                     </p>
                                 </div>
                                 <div>
-                                <a href="Sahil-Resume.pdf" download="Sahil's Resume.pdf" class="inline-block py-2 px-7 font-bold tracking-widest rounded-lg transition-opacity hover:opacity-90" style="background-color: var(--accent-color); color: var(--bg-color); text-decoration: none;"> Download Resume</a>
-                                    </a>
+                                    <a href="Sahil-Resume.pdf" download="Sahil's Resume.pdf" class="inline-block py-2 px-7 font-bold tracking-widest rounded-lg transition-opacity hover:opacity-90" style="background-color: var(--accent-color); color: var(--bg-color); text-decoration: none;">Download Resume</a>
                                 </div>
                             </div>
 
-                             <div class="mb-12">
-                                 <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Key Skills</h3>
-                                 <div class="space-y-6 text-sm leading-relaxed" style="color: var(--text-secondary);">
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Programming & Data</h4>
-                                         <p>Python, SQL, Java, Excel, Power BI, Plotly, Matplotlib, Seaborn</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Data & Analytics</h4>
-                                         <p>Data Analysis, Data Visualization, Data Wrangling, EDA, Data Modeling, Business Intelligence, Data Presentation, Dashboard Development</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Dev Tools</h4>
-                                         <p>GitHub (version control, hosting), Jupyter Notebook, Deepnote</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Web & Other Tech</h4>
-                                         <p>HTML, CSS, JavaScript basics, Flask/Django, Generative AI</p>
-                                     </div>
-                                 </div>
-                             </div>
+                            <div class="mb-12">
+                                <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Key Skills</h3>
+                                <div class="space-y-6 text-sm leading-relaxed" style="color: var(--text-secondary);">
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Programming & Data</h4>
+                                        <p>Python, SQL, Java, Excel, Power BI, Plotly, Matplotlib, Seaborn</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Data & Analytics</h4>
+                                        <p>Data Analysis, Data Visualization, Data Wrangling, EDA, Data Modeling, Business Intelligence, Data Presentation, Dashboard Development</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Dev Tools</h4>
+                                        <p>GitHub (version control, hosting), Jupyter Notebook, Deepnote</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Web & Other Tech</h4>
+                                        <p>HTML, CSS, JavaScript basics, Flask/Django, Generative AI</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                             <div class="mb-12">
-                                 <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Technologies</h3>
-                                 <div class="space-y-6 text-sm leading-relaxed" style="color: var(--text-secondary);">
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Languages</h4>
-                                         <p>Python, Java, SQL, HTML, CSS</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Technologies</h4>
-                                         <p>Power BI, Microsoft Excel (Advanced Formulas, Pivot Tables, Dashboarding), PySpark, Hadoop, Matplotlib, Plotly, Seaborn, MySQL, Generative AI (OpenAI API), Flask/Django</p>
-                                     </div>
-                                 </div>
-                             </div>
+                            <div class="mb-12">
+                                <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Technologies</h3>
+                                <div class="space-y-6 text-sm leading-relaxed" style="color: var(--text-secondary);">
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Languages</h4>
+                                        <p>Python, Java, SQL, HTML, CSS</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Technologies</h4>
+                                        <p>Power BI, Microsoft Excel (Advanced Formulas, Pivot Tables, Dashboarding), PySpark, Hadoop, Matplotlib, Plotly, Seaborn, MySQL, Generative AI (OpenAI API), Flask/Django</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                             <div class="mb-12">
-                                 <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Projects</h3>
-                                 <div class="space-y-6">
-                                     <div>
-                                         <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Business Intelligence Dashboard</h4>
-                                         <p class="font-light mt-1" style="color: var(--text-secondary);">Created an interactive dashboard (Power BI, SQL, Excel) to monitor KPIs like sales and revenue, aiding strategic decision-making through data modeling and visualization.</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Big Data Analysis with PySpark</h4>
-                                         <p class="font-light mt-1" style="color: var(--text-secondary);">Used PySpark and Hadoop to analyze large datasets, uncovering customer behavior patterns and improving data processing efficiency.</p>
-                                     </div>
-                                     <div>
-                                         <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Predictive Analytics for Sales Forecasting</h4>
-                                         <p class="font-light mt-1" style="color: var(--text-secondary);">Built a machine learning model in Python to forecast sales trends, improving accuracy and providing data-driven insights for business planning.</p>
-                                     </div>
-                                 </div>
-                             </div>
-                             
-                             <div class="mb-12">
-                                 <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Education</h3>
-                                 <div>
-                                     <h4 class="text-lg font-semibold" style="color: var(--text-primary);">IK Gujral Punjab Technical University</h4>
-                                     <p class="font-light mt-1" style="color: var(--text-secondary);">Bachelor of Technology in Computer Science | 2021 – 2025</p>
-                                 </div>
-                                 <div class="mt-4">
-                                     <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Ex-Servicemen Public Hr. Sec. School</h4>
-                                     <p class="font-light mt-1" style="color: var(--text-secondary);">Secondary & Higher Certificate | 2018 – 2020</p>
-                                 </div>
-                             </div>
+                            <div class="mb-12">
+                                <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Projects</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Business Intelligence Dashboard</h4>
+                                        <p class="font-light mt-1" style="color: var(--text-secondary);">Created an interactive dashboard (Power BI, SQL, Excel) to monitor KPIs like sales and revenue, aiding strategic decision-making through data modeling and visualization.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Big Data Analysis with PySpark</h4>
+                                        <p class="font-light mt-1" style="color: var(--text-secondary);">Used PySpark and Hadoop to analyze large datasets, uncovering customer behavior patterns and improving data processing efficiency.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Predictive Analytics for Sales Forecasting</h4>
+                                        <p class="font-light mt-1" style="color: var(--text-secondary);">Built a machine learning model in Python to forecast sales trends, improving accuracy and providing data-driven insights for business planning.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-12">
+                                <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Education</h3>
+                                <div>
+                                    <h4 class="text-lg font-semibold" style="color: var(--text-primary);">IK Gujral Punjab Technical University</h4>
+                                    <p class="font-light mt-1" style="color: var(--text-secondary);">Bachelor of Technology in Computer Science | 2021 – 2025</p>
+                                </div>
+                                <div class="mt-4">
+                                    <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Ex-Servicemen Public Hr. Sec. School</h4>
+                                    <p class="font-light mt-1" style="color: var(--text-secondary);">Secondary & Higher Certificate | 2018 – 2020</p>
+                                </div>
+                            </div>
 
-                             <div class="grid md:grid-cols-2 gap-12">
-                                 <div>
-                                     <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Certifications</h3>
-                                     <ul class="resume-list font-light space-y-1" style="color: var(--text-secondary);">
-                                         <li>IBM – Data Analyst Professional Certificate.</li>
-                                         <li>Coding Ninjas - Java and Data Structure Certificate.</li>
-                                         <li>International English Language Testing System.</li>
-                                         <li>Core Java Programming with Database.</li>
-                                     </ul>
-                                 </div>
-                                 <div>
-                                     <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Extracurriculars</h3>
-                                     <ul class="resume-list font-light space-y-1" style="color: var(--text-secondary);">
-                                         <li>Campus Ambassador for Coding Ninjas</li>
-                                         <li>Participant in a college Wall Painting and Science Play Competition</li>
-                                         <li>Earned ‘A’ Certificate in Annual NCC Training Camp</li>
-                                         <li>Participant in Science Exhibition & Paryavaran Ratna Award</li>
-                                     </ul>
-                                 </div>
-                             </div>
-                         </div>
-                     </section>
+                            <div class="grid md:grid-cols-2 gap-12">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Certifications</h3>
+                                    <ul class="resume-list font-light space-y-1" style="color: var(--text-secondary);">
+                                        <li>IBM – Data Analyst Professional Certificate.</li>
+                                        <li>Coding Ninjas - Java and Data Structure Certificate.</li>
+                                        <li>International English Language Testing System.</li>
+                                        <li>Core Java Programming with Database.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2" style="color: var(--text-primary); border-color: var(--accent-color);">Extracurriculars</h3>
+                                    <ul class="resume-list font-light space-y-1" style="color: var(--text-secondary);">
+                                        <li>Campus Ambassador for Coding Ninjas</li>
+                                        <li>Participant in a college Wall Painting and Science Play Competition</li>
+                                        <li>Earned ‘A’ Certificate in Annual NCC Training Camp</li>
+                                        <li>Participant in Science Exhibition & Paryavaran Ratna Award</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 `,
                 contact: `
                     <section id="contact" class="page-section py-20 max-w-2xl mx-auto">
@@ -406,6 +404,40 @@
                 window.scrollTo(0, 0);
             }
             
+            function attachModalListeners() {
+                document.querySelectorAll('.view-details-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const projectCard = e.currentTarget.closest('.group');
+                        const githubUrl = projectCard.dataset.githubUrl;
+                        
+                        // Populate modal content
+                        document.getElementById('modal-img').src = projectCard.dataset.img;
+                        document.getElementById('modal-title').textContent = projectCard.dataset.title;
+                        document.getElementById('modal-description').textContent = projectCard.dataset.desc;
+                        document.getElementById('modal-tech').textContent = projectCard.dataset.tech;
+                        
+                        // Update and show/hide the GitHub link
+                        const githubLinkElement = document.getElementById('modal-github-link');
+                        if (githubUrl && githubUrl !== '#') {
+                            githubLinkElement.href = githubUrl;
+                            githubLinkElement.parentElement.style.display = 'block';
+                        } else {
+                            githubLinkElement.parentElement.style.display = 'none';
+                        }
+                        
+                        // Show modal
+                        projectModal.style.display = 'flex';
+                        setTimeout(() => projectModal.classList.add('is-open'), 10);
+                    });
+                });
+            }
+
+            function closeModal() {
+                projectModal.classList.remove('is-open');
+                setTimeout(() => projectModal.style.display = 'none', 300);
+            }
+
+            // Event Listeners
             allNavLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -424,28 +456,10 @@
                 });
             });
 
-            function attachModalListeners() {
-                document.querySelectorAll('.view-details-btn').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const projectCard = e.currentTarget.closest('.group');
-                        document.getElementById('modal-img').src = projectCard.dataset.img;
-                        document.getElementById('modal-title').textContent = projectCard.dataset.title;
-                        document.getElementById('modal-description').textContent = projectCard.dataset.desc;
-                        document.getElementById('modal-tech').textContent = projectCard.dataset.tech;
-                        projectModal.style.display = 'flex';
-                        setTimeout(() => projectModal.classList.add('is-open'), 10);
-                    });
-                });
-            }
+            closeModalBtn.addEventListener('click', closeModal);
+            projectModal.querySelector('.modal-overlay').addEventListener('click', closeModal);
 
-            closeModalBtn.addEventListener('click', () => {
-                projectModal.classList.remove('is-open');
-                setTimeout(() => projectModal.style.display = 'none', 300);
-            });
-            projectModal.querySelector('.modal-overlay').addEventListener('click', () => {
-                closeModalBtn.click();
-            });
-
+            // Initial page load
             showPage('about');
         });
     </script>
