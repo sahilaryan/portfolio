@@ -13,7 +13,7 @@ This website showcases my **projects, GitHub work, resume, and technical experti
 
 ## 📬 Contact Details
 - **Email:** sahil.contact13@gmail.com  
-- **[Sahil's Github](https://github.com/sahil-analytics)** 
-- **[Sahil's Linkedin](https://linkedin.com/in/sahil1304)**
-- **[Sahil's Portfolio](https://sahilprojects.dev)**
+- **[Sahil - Github](https://github.com/sahil-analytics)** 
+- **[Sahil - Linkedin](https://linkedin.com/in/sahil1304)**
+- **[Sahil - Portfolio](https://sahilprojects.dev)**
   
